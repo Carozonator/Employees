@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>BMS MEAN</title>
+  <meta name="description" content="BMS MEAN set up.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Place favicon.ico and apple-touch-icon(s) in the public directory -->
+
+  <link rel="stylesheet" href="stylesheets/normalize.css">
+  <link rel="stylesheet" href="stylesheets/main.css">
+</head>
+<body>
+  <!--[if lt IE 8]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <button ng-hide="session.isLoggedIn" ng-click="session.facebookLogin()">Facebook Login</button>
+  <span ng-show="session.isLoggedIn" ng-bind="'Hello ' + session.currentUser.name"></span>
+  <button ng-show="session.isLoggedIn" ng-click="session.logout()">Logout</button>
+  <div ng-controller="registrationCtrl" ng-hide="session.isLoggedIn">
+    <form ng-submit="session.register(userInfo)">
+      <input type="text" name="name" ng-model="userInfo.name" placeholder="Name">
+      <input type="text" name="username" ng-model="userInfo.username" placeholder="Username">
+      <input type="text" name="email" ng-model="userInfo.email" placeholder="Email">
+      <input type="password" name="password" ng-model="userInfo.password" placeholder="Password">
+      <input type="password" name="confirmPassword" ng-model="userInfo.confirmPassword" placeholder="Password Repeat">
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+  <div ng-controller="loginCtrl" ng-hide="session.isLoggedIn">
+    <form ng-submit="session.login(userInfo)">
+      <input type="text" name="email" ng-model="userInfo.email" placeholder="Email">
+      <input type="password" name="password" ng-model="userInfo.password" placeholder="Password">
+      <button type="submit">Login</button>
+    </form>
+  </div>
+  <br/><br/>
+  <div ng-view></div>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-animate.min.js"></script>
+  <script type="text/javascript" src="angular/app.js"></script>
+  <script type="text/javascript" src="angular/controllers.js"></script>
+  <script type="text/javascript" src="angular/services.js"></script>
+  <script type="text/javascript">
+    window.user = <%- JSON.stringify(user) %>;
+  </script>
+</body>
+</html>
