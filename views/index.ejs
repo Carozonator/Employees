@@ -29,6 +29,7 @@
       <button type="submit">Sign Up</button>
     </form>
   </div>
+  {{registerError}}
   <div ng-controller="loginCtrl" ng-hide="session.isLoggedIn">
     <form ng-submit="session.login(userInfo)">
       <input type="text" name="email" ng-model="userInfo.email" placeholder="Email">
@@ -36,6 +37,7 @@
       <button type="submit">Login</button>
     </form>
   </div>
+  {{loginError}}
   <br/><br/>
   <div ng-view></div>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
