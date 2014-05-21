@@ -33,7 +33,7 @@ angular.module('app').factory('sessionService', ['$rootScope', '$window', '$http
           }
         })
         .error(function() {
-          scope.authFailed();
+          $rootScope.loginError = "Your login information is incorrect.";
         });
       },
       register: function(userInfo) {
@@ -55,11 +55,7 @@ angular.module('app').factory('sessionService', ['$rootScope', '$window', '$http
         })
         .error(function(error) {
           // Error: authentication failed
-          if (error === 'Username already taken') {
-            $rootScope.usernameError = error;
-          } else {
-            $rootScope.registerError = error;
-          }
+          $rootScope.registerError = error;
         });
       },
       resetSession: function() {
