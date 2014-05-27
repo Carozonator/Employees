@@ -70,6 +70,22 @@ angular.module('app').factory('sessionService', ['$rootScope', '$window', '$http
         left = (window.outerWidth - width) / 2;
         $window.open(url, 'facebook_login', 'width=' + width + ',height=' + height + ',scrollbars=0,top=' + top + ',left=' + left);
       },
+      twitterLogin: function() {
+        var url = '/auth/twitter',
+        width = 1000,
+        height = 650,
+        top = (window.outerHeight - height) / 2,
+        left = (window.outerWidth - width) / 2;
+        $window.open(url, 'twitter_login', 'width=' + width + ',height=' + height + ',scrollbars=0,top=' + top + ',left=' + left);
+      },
+      instagramLogin: function() {
+        var url = '/auth/instagram',
+        width = 1000,
+        height = 650,
+        top = (window.outerHeight - height) / 2,
+        left = (window.outerWidth - width) / 2;
+        $window.open(url, 'instagram_login', 'width=' + width + ',height=' + height + ',scrollbars=0,top=' + top + ',left=' + left);
+      },
       logout: function() {
         var scope = this;
         $http.get('/logout').success(function() {

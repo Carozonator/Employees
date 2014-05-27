@@ -7,7 +7,11 @@
  var passport = require('passport');
  var mongodbURI = '##############';
  var facebookAppId = '#############',
-     facebookAppSecret = '#####################';
+     facebookAppSecret = '#####################',
+     twitterKey = '############################',
+     twitterSecret = '#####################################',
+     instagramID = '#############################',
+     instagramSecret = '#####################';
 
 mongoose.connect(mongodbURI);
 
@@ -18,7 +22,7 @@ fs.readdirSync(models_path).forEach(function(file) {
     }
 });
 
-require('./config/passport')(passport, facebookAppId, facebookAppSecret);
+require('./config/passport')(passport, facebookAppId, facebookAppSecret, twitterKey, twitterSecret, instagramID, instagramSecret);
 
 var app = require('./config/express')(passport, mongodbURI);
 

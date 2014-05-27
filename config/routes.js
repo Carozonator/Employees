@@ -29,6 +29,22 @@ module.exports = function (app, passport) {
         res.render('after-auth', { state: 'failure', user: null });
     });
 
+    app.get('/auth/twitter', passport.authenticate('twitter', {
+            failureRedirect: '#!/login'
+        }), users.signin);
+
+    app.get('/auth/twitter/callback', passport.authenticate('twitter', {
+            failureRedirect: '#!/login'
+        }), users.authCallback);
+
+    app.get('/auth/instagram', passport.authenticate('instagram', {
+            failureRedirect: '#!/login'
+        }), users.signin);
+
+    app.get('/auth/instagram/callback', passport.authenticate('instagram', {
+            failureRedirect: '#!/login'
+        }), users.authCallback);
+
     app.get('/api/secured/*',
         function (req, res, next) {
             if (!req.user) {
