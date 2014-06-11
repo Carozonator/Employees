@@ -12,10 +12,8 @@
     "ejs": "*",
     "passport": "*",
     "passport-local": "*",
-    "passport-facebook": "*",
     "mongoose": "*",
     "passport-local-mongoose": "*",
-    "connect-mongo": "*",
-    "crypto": "*"
+    "connect-mongo": "*"
   }
 }

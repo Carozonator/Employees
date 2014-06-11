@@ -1,0 +1,22 @@
+<header>
+    <h1 class="text-center">Employees</h1>
+</header>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>LastName</th>
+        <th>Technologies</th>
+    </tr>
+    <tr ng-repeat="employee in employees">
+        <td><span>{{employee.name}}</span></td>
+        <td><span>{{employee.lastname}}</span></td>
+        <td>
+            <ul>
+                <li  ng-repeat="tech in employee.technologies | filter:{ status: true }">
+                    {{tech.technology}}
+                </li>
+            </ul>
+        </td>
+        <td><button ng-click="deleteEmployee(employee._id)">Delete</button></td>
+    </tr>       
+</table>

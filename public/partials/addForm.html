@@ -1,0 +1,15 @@
+
+<fieldset>
+<legend>Choose the Technologies</legend>
+   name:
+   <input type="text" value="" name="name" ng-model="newEmployee.name"/></br>
+   lastname:
+   <input type="text" value="" name="lastname" ng-model="newEmployee.lastname"></input></br>    
+    <li ng-repeat="technology in newEmployee.technologies track by $index">
+       <label>{{technology.technology}}</label>
+       <input id='{{technology.technology}}' 
+              type="checkbox"
+              ng-model="technology.status">
+   </li> 
+</fieldset>
+<button ng-click="addEmployee(name,lastname,technologies)">Add</button>

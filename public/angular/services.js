@@ -2,8 +2,7 @@
 
 /* Services */
 
-
-angular.module('app').factory('sessionService', ['$rootScope', '$window', '$http',
+angular.module('employees').factory('sessionService', ['$rootScope', '$window', '$http',
   function ($rootScope, $window, $http) {
     var session = {
       init: function () {

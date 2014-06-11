@@ -2,55 +2,65 @@
 
 /* Controllers */
 
-var appCtrl = angular.module('app');
+var app = angular.module('employees');
 
 // Home Controller
-appCtrl.controller('homeCtrl', ['$scope', '$rootScope', '$http',
+app.controller('EmployeesController', ['$scope', '$rootScope', '$http',
   function($scope, $rootScope, $http) {
-    $scope.messages = {};
-
-    function loadMessages() {
-      $http.get('/api/secured/message').success(function(data) {
-        $scope.messages.secured = data.message || data.error;
-      });
-
-      $http.get('/api/message').success(function(data) {
-        $scope.messages.unsecured = data.message || data.error;
-      });
+    refreshNewEmployee();
+    $scope.getEmployees = function() {
+        $http.get('/employees').success(function(res){
+            $scope.employees = res;
+        }).error(function(err){
+            if (err) throw err;
+        });
+    };
+    $scope.getEmployees();
+    
+     $scope.deleteEmployee = function(iden) {
+        $http.post('/delete',{id: iden}).success(function(res){
+            $scope.getEmployees();
+        }).error(function(err){
+            if (err) throw err;
+        });
+    };
+    $scope.addEmployee = function() {
+        $http.post('/add',$scope.newEmployee).success(function(res){
+            $scope.getEmployees();
+        }).error(function(err){
+            if (err) throw err;
+        });
+        refreshNewEmployee();
+    };
+    function refreshNewEmployee(){
+        $scope.newEmployee={
+        name:"",
+        lastname:"",
+        technologies: [{
+            technology:"C#",
+            status:false
+        },
+        {
+            technology:"JavaScript",
+            status:false
+        },
+        {
+            technology:"Angular",
+            status:false
+        },
+        {
+            technology:"Node",
+            status:false
+        },
+        {
+            technology:"XBox",
+            status:false
+        },
+        {
+            technology:"Office",
+            status:false
+        }]
+        }
     }
-
-    var deregistration = $rootScope.$on('session-changed', loadMessages);
-    $scope.$on('$destroy', deregistration);
-
-    loadMessages();
-
   }]);
-
-// LOGIN CONTROLLER
-
-appCtrl.controller('loginCtrl', ['$scope','$http',function($scope,$http) {
-  $scope.userInfo = {};
-}]);
-
-// REGISTRATION CONTROLLER
-appCtrl.controller('registrationCtrl', ['$scope','$http', function($scope,$http) {
-  $scope.userInfo = {};
-}]);
-
-//PARRIAL 3 CONTROLLER
-appCtrl.controller('mainController', function($scope) {
-});
-
-// Menu Controller
-appCtrl.controller('menuController', function($scope) {
-  $scope.menu = [
-  {
-    menuname: "Home",
-    menulocation: "/"
-  },
-  {
-    menuname: "Login",
-    menulocation: "/#/login"
-  }
-  ];
-});
+  
